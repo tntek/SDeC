@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper."
+title: "Consistent Text-to-Image Generation via Scene De-Contextualization"
+version: "0.1.0"
+url: "https://openreview.net/forum?id=rRp8yYKRGj"
+date-released: "2026-02-10"
+license: "MIT/Apache-2.0"
+keywords:
+  - text-to-image
+  - diffusion models
+  - consistency
+  - de-contextualization
+  - stable diffusion xl
+authors:
+  - family-names: "Tang"
+    given-names: "Song"
+  - family-names: "Gong"
+    given-names: "Peihao"
+  - family-names: "Li"
+    given-names: "Kunyu"
+  - family-names: "Guo"
+    given-names: "Kai"
+  - family-names: "Wang"
+    given-names: "Boyu"
+  - family-names: "Ye"
+    given-names: "Mao"
+  - family-names: "Zhang"
+    given-names: "Jianwei"
+  - family-names: "Zhu"
+    given-names: "Xiatian"
