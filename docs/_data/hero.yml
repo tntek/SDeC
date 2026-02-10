@@ -1,0 +1,17 @@
+autoplay: true      # 是否自动播放
+interval: 3500      # 切换间隔（毫秒）
+
+images:
+  - src: /assets/images/hero/hero1.jpg
+    alt: 主图 1
+    caption: ""     # 可选：需要时写一句说明
+  - src: /assets/images/hero/hero2.jpg
+    alt: 主图 2
+    caption: ""
+  - src: /assets/images/hero/hero3.jpg
+    alt: 主图 3
+    caption: ""
+
+  - src: /assets/images/hero/hero4.jpg
+    alt: 主图 4
+    caption: ""

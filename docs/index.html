@@ -1,0 +1,211 @@
+---
+layout: default
+hide_header: true
+title: Consistent Text-to-Image Generation via Scene De-contextualization
+---
+
+<!-- 顶部 hero：标题 + 作者 + 按钮（Nano3D风格） + 下面接你的轮播图 -->
+<section class="hero hero--paper">
+  <div class="container hero__inner hero__inner--center">
+
+    <h1 class="hero-title-gradient">
+      {{ site.title }}
+    </h1>
+
+    <!-- 作者与单位 -->
+    <div class="hero__authors hero__authors--centered">
+      <p class="hero__authors-line">
+        Author A<sup>1</sup>,&nbsp; Author B<sup>2</sup>,&nbsp; Author C<sup>1</sup>
+      </p>
+      <p class="hero__affiliations">
+        <sup>1</sup>affiliation A &nbsp; <sup>2</sup>affiliation B
+      </p>
+      <p class="hero__notes">
+        * Equal contribution &nbsp; ✉ Corresponding author
+      </p>
+    </div>
+
+    <!-- 四个按钮，居中 + 圆角 + 阴影 -->
+    <!-- testtest -->
+    <div class="hero__actions hero__actions--centered">
+      {% for link in site.links %}
+        <a
+          class="paper-pill paper-pill--{{ link.key | downcase }}"
+          href="{{ link.url }}"
+          target="_blank" rel="noopener"
+        >
+          {{ link.name }}
+        </a>
+      {% endfor %}
+    </div>
+
+    <!-- 你要显示在标题和轮播之间的那句话 -->
+    <p class="paper-intro paper-intro--center">
+      <!-- This is a sentence that introduces the research direction and significance of the entire paper. -->
+    </p>
+  </div>
+
+  <!-- 恢复原 hero 轮播 -->
+  {% assign hero = site.data.hero %}
+  <div
+    class="hero-slider card"
+    data-autoplay="{{ hero.autoplay | default: true }}"
+    data-interval="{{ hero.interval  | default: 3500 }}"
+    aria-label="Hero image slider"
+  >
+    <div class="slides" aria-live="polite">
+      {% for img in hero.images %}
+      <div class="slide{% if forloop.first %} is-active{% endif %}">
+        <img src="{{ img.src | relative_url }}" alt="{{ img.alt | default: 'Hero ' | append: forloop.index }}">
+        {% if img.caption %}
+        <div class="caption">{{ img.caption }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <button class="nav prev" aria-label="Previous">‹</button>
+    <button class="nav next" aria-label="Next">›</button>
+    <div class="dots"></div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 2) Abstract：MD → HTML -->
+<section id="abstract" class="section gray">
+  <div class="container">
+    <h2 class="hand-title h2-center">Abstract</h2>
+    <div class="lead">
+      {% capture abs_raw %}{% include sections/abstract.md %}{% endcapture %}
+      {{ abs_raw | markdownify }}
+    </div>
+  </div>
+</section>
+
+<!-- 3) Background：MD → HTML -->
+<section id="background" class="section">
+  <div class="container">
+    <h2 class="hand-title">Introduction</h2>
+    <p class="subtle"></p>
+    {% capture bg_raw %}{% include sections/background.md %}{% endcapture %}
+    {{ bg_raw | markdownify }}
+  </div>
+</section>
+
+<!-- 4) Approach：MD → HTML -->
+<section id="approach" class="section">
+  <div class="container">
+    <h2 class="hand-title">Scene Contextualizaztion</h2>
+    <p class="subtle"></p>
+    {% capture app_raw %}{% include sections/scene-contextualizaztion.md %}{% endcapture %}
+    {{ app_raw | markdownify }}
+  </div>
+</section>
+
+
+
+
+<!-- 6) Societal Impact：MD → HTML -->
+<section id="impact" class="section tight">
+  <div class="container">
+    <h2 class="hand-title">Comparison To Current Methods</h2>
+    <p class="subtle"></p>
+    {% capture imp_raw %}{% include sections/impact.md %}{% endcapture %}
+    {{ imp_raw | markdownify }}
+  </div>
+</section>
+
+
+<!-- 4.5) Approach：MD → HTML -->
+<section id="approach" class="section">
+  <div class="container">
+    <h2 class="hand-title">Integrating With Other Generative Tasks</h2>
+    <p class="subtle"></p>
+    {% capture app_raw %}{% include sections/furtheranalysis.md %}{% endcapture %}
+    {{ app_raw | markdownify }}
+  </div>
+</section>
+
+
+
+
+
+<!-- New Section: Consistent story generation with multiple subjects -->
+<section id="consistentstory" class="section">
+  <div class="container">
+    <h2 class="hand-title">Consistent story generation with multiple subjects</h2>
+    <p class="subtle"></p>
+    {% capture story_raw %}{% include sections/consistentstory.md %}{% endcapture %}
+    {{ story_raw | markdownify }}
+  </div>
+</section>
+
+
+
+
+
+
+<section id="generality" class="section">
+  <div class="container">
+    <h2 class="hand-title">Generality To Base Generative Model</h2>
+    {% include sections/generality.md %}
+  </div>
+</section>
+
+
+
+
+
+
+
+{% comment %}
+
+<!-- 5) Results：读取 _data/results.yml 的图墙（带放大） -->
+
+
+<!-- 5) Results：由 results.md 驱动 -->
+<!-- <section id="results" class="section">
+  <div class="container">
+    <h2 class="hand-title">Poster</h2>
+    <p class="subtle"></p>
+
+    {% capture res_raw %}{% include sections/results.md %}{% endcapture %}
+    {{ res_raw | markdownify }}
+  </div>
+</section>
+
+
+
+
+<section id="bibtex" class="section">
+  <div class="container">
+    <h2 class="hand-title">Bibtex</h2>
+    <p class="subtle"></p>
+    {% capture app_raw %}{% include sections/bibtex.md %}{% endcapture %}
+    {{ app_raw | markdownify }}
+  </div>
+</section> -->
+
+
+{% endcomment %}
+
+
+
+
+
+
+
+
+
+

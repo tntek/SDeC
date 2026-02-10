@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Consistent Text-to-Image Generation via Scene De-contextualization</title>
+
+
+  <!-- ✅ 自定义 favicon：SVG 为首选，带 PNG 与苹果、Safari 兼容 -->
+<link rel="icon" href="/gemholm/assets/icons/favicon-32x32.png" type="image/png">
+
+
+
+  <meta name="description" content="Single-page project display">
+  <link rel="stylesheet" href="/gemholm/assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+  <!-- ✅ 新增：引入 _includes/head.html -->
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Jekyll v4.3.4">
+
+  <title>Consistent Text-to-Image Generation via Scene De-contextualization · Consistent Text-to-Image Generation via Scene De-contextualization</title>
+  <meta name="description" content="Single-page project display">
+  <meta name="theme-color" content="#ffffff">
+
+  
+    <link rel="canonical" href="http://localhost:4000/gemholm/">
+    <meta property="og:url" content="http://localhost:4000/gemholm/">
+  
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Consistent Text-to-Image Generation via Scene De-contextualization">
+  <meta property="og:site_name" content="Consistent Text-to-Image Generation via Scene De-contextualization">
+  <meta property="og:description" content="Single-page project display">
+  
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Consistent Text-to-Image Generation via Scene De-contextualization">
+  <meta name="twitter:description" content="Single-page project display">
+  
+
+  <!-- Icons -->
+  <link rel="icon" href="/gemholm/assets/favicon.ico">
+  <link rel="apple-touch-icon" href="/gemholm/assets/apple-touch-icon.png">
+
+  <!-- 站点主样式（由 assets/css/styles.scss 编译；带时间戳防缓存） -->
+  <link rel="stylesheet" href="/gemholm/assets/css/styles.css?v=1770760565">
+
+  <!-- 预连接加速字体域名 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- 手写体字体（英：Patrick Hand；中：Ma Shan Zheng） -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+
+  <!-- 集中处理标题的手写体与基础样式 -->
+  <style id="handwriting-headings">
+    :root{
+      --hand-font: "Patrick Hand", "Ma Shan Zheng",
+                   ui-sans-serif, -apple-system, system-ui, "Segoe UI",
+                   Roboto, "Helvetica Neue", Arial, "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+                   sans-serif;
+    }
+
+    /* 让各类标题都用手写体，且强制居中 */
+    h1, h2, h3, h4, h5, h6,
+    main h1, main h2,
+    .section h1, .section h2,
+    .section-title, .paper-title, .page-title, .post-title,
+    h1[id], h2[id] {
+      font-family: var(--hand-font) !important;
+      text-align: center !important;
+      font-weight: 700 !important;
+      letter-spacing: .2px;
+      line-height: 1.15;
+      text-shadow:
+        0 1px 0 #fff,
+        0 3px 8px rgba(0,0,0,.12);
+    }
+
+    /* ✅ 调小 h1 字号，去掉 !important */
+    h1, .section h1, .section-title, .page-title, .post-title {
+      font-size: clamp(24px, 3.6vw, 40px);
+      margin: .35em 0 .25em;
+    }
+
+    /* h2 原本的强制字号规则保留注释，避免覆盖 hand-title
+    h2, .section h2 {
+      font-size: clamp(36px, 5.2vw, 64px) !important;
+      margin: .6em 0 .35em;
+      font-weight: 700 !important;
+    } */
+
+    /* 中文页面保持加粗（不动字号） */
+    html[lang^="zh"] h1,
+    html[lang^="zh"] h2,
+    html[lang^="zh"] .section h2,
+    html[lang^="zh"] .section-title,
+    html[lang^="zh"] .page-title,
+    html[lang^="zh"] .post-title {
+      font-weight: 700 !important;
+    }
+  </style>
+
+  
+</head>
+
+
+</head>
+<body>
+
+  
+
+  <main class="site-main">
+    <!-- 顶部 hero：标题 + 作者 + 按钮（Nano3D风格） + 下面接你的轮播图 -->
+<section class="hero hero--paper">
+  <div class="container hero__inner hero__inner--center">
+
+    <h1 class="hero-title-gradient">
+      Consistent Text-to-Image Generation via Scene De-contextualization
+    </h1>
+
+    <!-- 作者与单位 -->
+    <div class="hero__authors hero__authors--centered">
+      <p class="hero__authors-line">
+        Author A<sup>1</sup>,&nbsp; Author B<sup>2</sup>,&nbsp; Author C<sup>1</sup>
+      </p>
+      <p class="hero__affiliations">
+        <sup>1</sup>affiliation A &nbsp; <sup>2</sup>affiliation B
+      </p>
+      <p class="hero__notes">
+        * Equal contribution &nbsp; ✉ Corresponding author
+      </p>
+    </div>
+
+    <!-- 四个按钮，居中 + 圆角 + 阴影 -->
+    <!-- testtest -->
+    <div class="hero__actions hero__actions--centered">
+      
+        <a
+          class="paper-pill paper-pill--paper"
+          href="/assets/papers/paper.pdf"
+          target="_blank" rel="noopener"
+        >
+          Paper
+        </a>
+      
+        <a
+          class="paper-pill paper-pill--code"
+          href="https://github.com/..."
+          target="_blank" rel="noopener"
+        >
+          Code
+        </a>
+      
+        <a
+          class="paper-pill paper-pill--dataset"
+          href="https://example.com/dataset"
+          target="_blank" rel="noopener"
+        >
+          Dataset
+        </a>
+      
+        <a
+          class="paper-pill paper-pill--demo"
+          href="/demo"
+          target="_blank" rel="noopener"
+        >
+          Demo
+        </a>
+      
+    </div>
+
+    <!-- 你要显示在标题和轮播之间的那句话 -->
+    <p class="paper-intro paper-intro--center">
+      <!-- This is a sentence that introduces the research direction and significance of the entire paper. -->
+    </p>
+  </div>
+
+  <!-- 恢复原 hero 轮播 -->
+  
+  <div
+    class="hero-slider card"
+    data-autoplay="true"
+    data-interval="3500"
+    aria-label="Hero image slider"
+  >
+    <div class="slides" aria-live="polite">
+      
+      <div class="slide is-active">
+        <img src="/gemholm/assets/images/hero/hero1.jpg" alt="主图 11">
+        
+        <div class="caption"></div>
+        
+      </div>
+      
+      <div class="slide">
+        <img src="/gemholm/assets/images/hero/hero2.jpg" alt="主图 22">
+        
+        <div class="caption"></div>
+        
+      </div>
+      
+      <div class="slide">
+        <img src="/gemholm/assets/images/hero/hero3.jpg" alt="主图 33">
+        
+        <div class="caption"></div>
+        
+      </div>
+      
+      <div class="slide">
+        <img src="/gemholm/assets/images/hero/hero4.jpg" alt="主图 44">
+        
+        <div class="caption"></div>
+        
+      </div>
+      
+    </div>
+    <button class="nav prev" aria-label="Previous">‹</button>
+    <button class="nav next" aria-label="Next">›</button>
+    <div class="dots"></div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 2) Abstract：MD → HTML -->
+<section id="abstract" class="section gray">
+  <div class="container">
+    <h2 class="hand-title h2-center">Abstract</h2>
+    <div class="lead">
+      
+      <p>Consistent text-to-image (T2I) generation seeks to produce identity-preserving images of the same subject across diverse scenes, yet it often fails due to a phenomenon called identity (ID) shift. Previous methods have tackled this issue, but typically rely on the unrealistic assumption of knowing all target scenes in advance. This paper reveals that a key source of ID shift is the native correlation between subject and scene context, called scene contextualization, which arises naturally as T2I models fit the training distribution of vast natural images. We formally prove the near-universality of this scene-ID correlation and derive theoretical bounds on its strength. On this basis, we propose a novel, efficient, training-free prompt embedding editing approach, called Scene De-Contextualization (SDeC), that imposes an inversion process of T2I’s built-in scene contextualization. Specifically, it identifies and suppresses the latent scene-ID correlation within the ID prompt’s embedding by quantifying the SVD directional stability to adaptively re-weight the corresponding eigenvalues. Critically, SDeC allows for per-scene use (one scene per prompt) without requiring prior access to all target scenes. This makes it a highly flexible and general solution well-suited to real-world applications where such prior knowledge is often unavailable or varies over time. Experiments demonstrate that SDeC significantly enhances identity preservation while maintaining scene diversity.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- 3) Background：MD → HTML -->
+<section id="background" class="section">
+  <div class="container">
+    <h2 class="hand-title">Introduction</h2>
+    <p class="subtle"></p>
+    
+    <!-- background.md -->
+
+<p>This paper investigates the problem of ID shift in text-to-image (T2I) generation—where the same subject’s appearance changes across different generated scenes. While T2I models like Stable Diffusion excel at visual fidelity, they struggle to maintain consistent identity in narrative or sequential tasks. The authors attribute this to scene contextualization, a bias caused by the model’s learned association between subjects and typical scene contexts.
+To address this, they introduce Scene De-Contextualization (SDeC), which mathematically reverses contextual bias through eigenvalue optimization using SVD. SDeC decouples identity embeddings from scene correlations, allowing consistent generation without needing full target-scene supervision. Experiments show that SDeC improves identity preservation and scene diversity across various models and tasks.</p>
+
+<div class="card pad tight">
+  <p class="text-2">Visualization of how scene contextualization affects subject identity consistency in text-to-image generation.</p>
+
+  <figure style="text-align:center;">
+    <img src="/gemholm/assets/images/background/bg-01.png" alt="背景图" style="max-width:100%; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.08);" />
+<figcaption style="font-size:.95rem; color:#4b5563; margin-top:8px; text-align:left;">
+  Figure 1: Illustration of scene contextualization with SDXL. <br />
+  <b>Left:</b> The attire of the subject varies with the site. 
+  <b>Right:</b> The subject’s clothing changes with the season.
+</figcaption>
+
+  </figure>
+</div>
+
+  </div>
+</section>
+
+<!-- 4) Approach：MD → HTML -->
+<section id="approach" class="section">
+  <div class="container">
+    <h2 class="hand-title">Scene Contextualizaztion</h2>
+    <p class="subtle"></p>
+    
+    <!-- _includes/sections/approach.md（或 approach.md） -->
+
+<!-- ### 方法简介 -->
+
+<p>We propose <strong>SDeC (Scene De-Contextualization)</strong>, which mitigates scene influence by identifying and suppressing the latent scene–ID correlation subspace in ID embeddings. Using SVD-based optimization and eigenvalue modulation, SDeC enhances stable directions and reconstructs a refined identity representation, improving identity consistency in generated images.</p>
+
+<div class="card pad tight">
+  <!-- 这句是和 background 一样的简短说明，可删 -->
+  <p class="text-2"></p>
+
+  <!-- 与 background 相同的正方形紧凑网格：square + s-220 + compact -->
+<div class="fig-grid single">
+  <figure class="fig">
+    <img src="/gemholm/assets/images/approach/app-01.png" alt="示例图 1" />
+    <figcaption></figcaption>
+  </figure>
+</div>
+
+</div>
+
+  </div>
+</section>
+
+
+
+
+<!-- 6) Societal Impact：MD → HTML -->
+<section id="impact" class="section tight">
+  <div class="container">
+    <h2 class="hand-title">Comparison To Current Methods</h2>
+    <p class="subtle"></p>
+    
+    
+<div class="hero-slider experiment" id="impact-slider-1" data-autoplay="4000">
+  <div class="slides">
+
+    <!-- 第 1 张 -->
+    <div class="slide is-active">
+      <img src="/gemholm/assets/images/impact/imp-01.png" alt="Impact 01" />
+      <figcaption class="mt-2 block">
+        Supplementary qualitative comparison results.
+      </figcaption>
+    </div>
+
+    <!-- 第 2 张 -->
+    <div class="slide">
+      <img src="/gemholm/assets/images/impact/imp-02.png" alt="Impact 02" />
+      <figcaption class="mt-2 block">
+        Results of baseline experiment where the images are arranged in a U-shape.
+        All scenarios share the same ID prompt, and the scene prompts are different,
+        as in the setting of this paper.
+      </figcaption>
+    </div>
+
+    <!-- 第 3 张 -->
+    <div class="slide">
+      <img src="/gemholm/assets/images/impact/imp-00.png" alt="Impact 03" />
+      <figcaption class="mt-2 block">
+        Additional experimental result demonstrating the consistency under varied
+        environmental prompts.
+      </figcaption>
+    </div>
+
+  </div>
+
+  <!-- 导航按钮 -->
+  <button class="nav prev" aria-label="Prev">‹</button>
+  <button class="nav next" aria-label="Next">›</button>
+
+  <!-- 圆点 -->
+  <div class="dots">
+    <button class="dot is-active" aria-label="1"></button>
+    <button class="dot" aria-label="2"></button>
+    <button class="dot" aria-label="3"></button>
+  </div>
+</div>
+
+<!-- ===================== -->
+<!-- Slider 2: 后三张（实际使用 2 张） -->
+<!-- ===================== -->
+
+<div class="hero-slider experiment" id="impact-slider-2" style="margin-top:120px;" data-autoplay="4000">
+
+  <div class="slides">
+
+    <div class="slide is-active">
+      <img src="/gemholm/assets/images/impact/imp-04.png" alt="Impact 04" />
+      <figcaption class="mt-2 block">
+        Experiment with minor perturbation where the images are arranged in a U-shape.
+        In the intermediate scenarios (#2–#11), the scene prompts generated by ChatGPT-5.0
+        follow a literary style similar to that of the first, while the ID prompts remain
+        consistent with the first, differing only in the substitution of the subject
+        with a related concept.
+      </figcaption>
+    </div>
+
+    <div class="slide">
+      <img src="/gemholm/assets/images/impact/imp-05.png" alt="Impact 05" />
+      <figcaption class="mt-2 block">
+        Extended experiment with minor perturbations, with the number of images increased
+        to the maximum continuous generation times of Nano Banana.
+      </figcaption>
+    </div>
+
+  </div>
+
+  <!-- 导航按钮 -->
+  <button class="nav prev" aria-label="Prev">‹</button>
+  <button class="nav next" aria-label="Next">›</button>
+
+  <!-- 圆点 -->
+  <div class="dots">
+    <button class="dot is-active" aria-label="1"></button>
+    <button class="dot" aria-label="2"></button>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+<!-- 4.5) Approach：MD → HTML -->
+<section id="approach" class="section">
+  <div class="container">
+    <h2 class="hand-title">Integrating With Other Generative Tasks</h2>
+    <p class="subtle"></p>
+    
+    <!-- __includes/sections/approach.md（或 approach.md） -->
+
+<!-- ### 方法简介 -->
+
+<div class="card pad tight">
+  <!-- 这句是和 background 一样的简短说明，可删 -->
+  <p class="text-2"></p>
+
+  <!-- 与 background 相同的正方形紧凑网格：square + s-220 + compact -->
+  <div class="fig-grid single">
+    <figure class="fig">
+      <img src="/gemholm/assets/images/furtheranalysis/fa-01.png" alt="示例图 1" />
+      <figcaption></figcaption>
+    </figure>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+
+
+
+<!-- New Section: Consistent story generation with multiple subjects -->
+<section id="consistentstory" class="section">
+  <div class="container">
+    <h2 class="hand-title">Consistent story generation with multiple subjects</h2>
+    <p class="subtle"></p>
+    
+    
+<div class="card pad tight">
+  <p class="text-2"></p>
+
+
+  <div class="fig-grid single">
+    <figure class="fig">
+      <img src="/gemholm/assets/images/consistentstory/ct-01.png" alt="示例图 1" />
+      <figcaption></figcaption>
+    </figure>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+
+
+
+
+<section id="generality" class="section">
+  <div class="container">
+    <h2 class="hand-title">Generality To Base Generative Model</h2>
+    <p class="subtle mb-6"></p>
+
+
+<div class="hero-slider experiment" id="generality-slider" data-autoplay="4000">
+  <div class="slides">
+
+    <!-- 第1张 -->
+  <div class="slide is-active">
+      <img src="/gemholm/assets/images/generality/hero1.jpg" alt="Generality 001">
+      <figcaption class="mt-2 block">
+        <!-- Supplementary qualitative comparison results. -->
+      </figcaption>
+    </div>
+
+    <!-- 第2张 -->
+  <div class="slide">
+      <img src="/gemholm/assets/images/generality/hero2.jpg" alt="Generality 002">
+      <figcaption class="mt-2 block">
+        <!-- Results of baseline experiment where the scenes are different but ID is shared. -->
+      </figcaption>
+    </div>
+
+    <!-- 第3张 -->
+  <div class="slide">
+      <img src="/gemholm/assets/images/generality/hero3.jpg" alt="Generality 003">
+      <figcaption class="mt-2 block">
+        <!-- Additional experimental result demonstrating the consistency under varied prompts. -->
+      </figcaption>
+    </div>
+
+    <!-- 第4张 -->
+  <div class="slide">
+      <img src="/gemholm/assets/images/generality/hero4.jpg" alt="Generality 004">
+      <figcaption class="mt-2 block">
+        <!-- Another qualitative example on a base generative model. -->
+      </figcaption>
+    </div>
+
+  </div> <!-- /slides -->
+
+  <!-- 导航按钮 -->
+  <button class="nav prev" aria-label="Prev">‹</button>
+  <button class="nav next" aria-label="Next">›</button>
+
+  <!-- 小圆点 -->
+  <div class="dots">
+    <button class="dot is-active" aria-label="1"></button>
+    <button class="dot" aria-label="2"></button>
+    <button class="dot" aria-label="3"></button>
+    <button class="dot" aria-label="4"></button>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2026 DDM</span>
+      <span class="sep">•</span>
+      <a href="https://github.com/ddmeer/gemholm" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <!-- 轻量 Lightbox（保留，便于后续结果图放大） -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <img alt="预览大图">
+  </div>
+  <script>
+  (function () {
+    const overlay = document.getElementById('lightbox');
+    const overlayImg = overlay.querySelector('img');
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-lightbox]');
+      if (a) {
+        e.preventDefault();
+        overlayImg.src = a.getAttribute('href');
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+      }
+      if (e.target === overlay) {
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden', 'true');
+        overlayImg.src = '';
+      }
+    });
+  })();
+  </script>
+
+  <!-- Hero 轮播脚本（零依赖） -->
+  <script>
+  (function () {
+    document.querySelectorAll('.hero-slider').forEach(function (root) {
+      var slides = Array.from(root.querySelectorAll('.slide'));
+      if (slides.length <= 1) return;
+
+      // 生成圆点
+      var dotsWrap = root.querySelector('.dots') || document.createElement('div');
+      dotsWrap.classList.add('dots'); dotsWrap.innerHTML = '';
+      slides.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.className = 'dot' + (i === 0 ? ' is-active' : '');
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        b.addEventListener('click', function () { go(i); });
+        dotsWrap.appendChild(b);
+      });
+      if (!root.querySelector('.dots')) root.appendChild(dotsWrap);
+      var dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+
+      var prevBtn = root.querySelector('.prev');
+      var nextBtn = root.querySelector('.next');
+      var idx = 0;
+      var autoplay = root.dataset.autoplay === 'true';
+      var interval = parseInt(root.dataset.interval || '3500', 10);
+      var timer = null;
+
+      function setActive(i) {
+        slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+        dots.forEach(function (d, k) { d.classList.toggle('is-active', k === i); });
+      }
+      function go(i) { idx = (i + slides.length) % slides.length; setActive(idx); restart(); }
+      function next() { go(idx + 1); }
+      function prev() { go(idx - 1); }
+
+      prevBtn && prevBtn.addEventListener('click', prev);
+      nextBtn && nextBtn.addEventListener('click', next);
+
+      function start() { if (!autoplay) return; stop(); timer = setInterval(next, interval); }
+      function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+      function restart(){ if (autoplay) { stop(); start(); } }
+
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+      // 触摸滑动
+      var startX = null;
+      root.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, {passive:true});
+      root.addEventListener('touchend', function (e) {
+        if (startX == null) return;
+        var dx = e.changedTouches[0].clientX - startX; startX = null;
+        var threshold = 35;
+        if (dx > threshold) prev(); else if (dx < -threshold) next();
+      });
+
+      // 键盘左右键
+      root.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+      root.setAttribute('tabindex', '0');
+
+      start();
+    });
+  })();
+
+
+
+
+
+function initHeroSlider(root){
+  const slides = Array.from(root.querySelectorAll('.slide'));
+  const dots   = Array.from(root.querySelectorAll('.dot'));
+  const prevBtn = root.querySelector('.nav.prev');
+  const nextBtn = root.querySelector('.nav.next');
+
+  let idx = Math.max(0, slides.findIndex(s => s.classList.contains('is-active')));
+  if (idx < 0) idx = 0;
+
+  function show(i){
+    idx = (i + slides.length) % slides.length;
+    slides.forEach((s, k) => s.classList.toggle('is-active', k === idx));
+    dots.forEach((d, k) => d.classList.toggle('is-active', k === idx));
+  }
+
+  prevBtn && prevBtn.addEventListener('click', () => show(idx - 1));
+  nextBtn && nextBtn.addEventListener('click', () => show(idx + 1));
+  dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+
+  /* ==== ✅ 自动轮播（可选） ==== 
+     在 HTML 上写 data-autoplay="5000" 就会每 5s 自动播放 */
+  const interval = Number(root.dataset.autoplay || 0);
+  let timer = null;
+
+  const start = () => {
+    if (interval > 0 && !timer) timer = setInterval(() => show(idx + 1), interval);
+  };
+  const stop = () => {
+    if (timer) { clearInterval(timer); timer = null; }
+  };
+
+  // 悬停暂停，离开继续；切换标签页时暂停
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stop() : start();
+  });
+
+  start();  // 如果设置了 data-autoplay，就开始自动轮播
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hero-slider').forEach(initHeroSlider);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+# _data/results.yml
+
+mode: pdf                  # pdf / cards 二选一
+pdf: "/assets/papers/paper.pdf"
+caption: Poster            # 可选：标题/说明
+
+# 如果以后还想用卡片模式，保留 items:
+items:
+  - image: /assets/images/results/r1.jpg
+    caption: 我们的结果 vs. baseline A
+  - image: /assets/images/results/r2.jpg
+    caption: 消融：去掉模块 X
+  - image: /assets/images/results/r3.jpg
+    caption: 不同条件下的生成

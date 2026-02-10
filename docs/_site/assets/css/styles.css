@@ -1,0 +1,1222 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Ma+Shan+Zheng&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap");
+:root {
+  --bg: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --brand: #111827;
+  --accent: #2563eb;
+  --surface: #f8fafc;
+  --border: #e5e7eb;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "PingFang SC", "Microsoft Yahei", sans-serif;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+.narrow {
+  width: min(900px, 92%);
+  margin: 0 auto;
+}
+
+/* Header：半透明、粘顶 */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: saturate(1.5) blur(8px);
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.brand {
+  font-weight: 700;
+  color: var(--brand);
+}
+
+/* Header 右上角按钮（深色胶囊） */
+.nav.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: #f5f5f5; /* ✅ 从 #2b2b2b 改为浅灰底 */
+  color: #333; /* ✅ 从 #fff 改为深灰字 */
+  border: 1px solid #ddd; /* ✅ 边框更柔和 */
+  transition: transform 0.04s ease, background 0.2s ease, color 0.2s ease; /* ✅ 去掉强烈滤镜 */
+  font-weight: 400; /* ✅ 从 500 降到 400，更轻一点 */
+  letter-spacing: 0.2px;
+}
+
+.pill:hover {
+  background: #e9e9e9; /* ✅ hover 仅稍微变深 */
+  /* ✅ 去掉原来的 filter: brightness(1.1); */
+}
+
+.pill:active {
+  transform: translateY(1px);
+}
+
+.pill.demo {
+  background: #f5f5f5;
+}
+
+@media (max-width: 520px) {
+  .nav.actions {
+    gap: 8px;
+  }
+  .nav.actions a.pill {
+    font-family: "Patrick Hand", cursive;
+    font-size: 1.05rem; /* ✅ 从 1.2rem 略微调小，更不抢眼 */
+  }
+}
+/* 覆盖右上角导航按钮的 pill 样式，去掉背景/边框 */
+.nav.actions .pill {
+  background: transparent !important; /* ✅ 透明背景 */
+  border: none !important; /* ✅ 去掉圆角和边框 */
+  box-shadow: none !important; /* ✅ 去掉阴影 */
+  color: #333 !important; /* ✅ 深灰字，不刺眼 */
+  border-radius: 0 !important; /* ✅ 不再胶囊状 */
+  padding: 0 0.3rem; /* ✅ 简单内边距 */
+  text-decoration: underline; /* ✅ 像链接 */
+  font-weight: 400; /* ✅ 正常字重 */
+}
+
+.nav.actions .pill:hover {
+  color: #000 !important; /* ✅ hover 时变深 */
+  text-decoration: underline;
+}
+
+.center-buttons .pill {
+  background: #007acc; /* ✅ 明亮主色（蓝色，可换成你的主题色） */
+  color: #fff !important; /* ✅ 白色文字 */
+  font-size: 1.1rem; /* ✅ 稍微大一点 */
+  font-weight: 600; /* ✅ 粗一点 */
+  padding: 0.5rem 1.5rem; /* ✅ 比右上角更大，像按钮 */
+  border-radius: 999px; /* ✅ 胶囊状 */
+  border: none;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* ✅ 投影，立体感 */
+}
+
+.center-buttons .pill:hover {
+  background: #005fa3; /* ✅ hover 时更深 */
+  transform: translateY(-2px); /* ✅ hover 微微上浮 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.center-buttons {
+  margin-top: 1.5rem; /* ✅ 标题和按钮之间距离 */
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem; /* ✅ 按钮之间更宽的间距 */
+  flex-wrap: wrap; /* ✅ 屏幕小的时候自动换行 */
+}
+
+/* Sections */
+.section {
+  padding: 56px 0;
+}
+
+.section h2 {
+  margin: 0 0 16px;
+  font-size: 1.6rem;
+}
+
+.hint, .subtle {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.subtle {
+  margin-top: -6px;
+  margin-bottom: 14px;
+}
+
+/* Hero（标题区） */
+.hero {
+  padding-top: 72px;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin: 0 0 8px;
+}
+
+.authors, .affiliations {
+  color: var(--muted);
+  margin: 6px 0;
+}
+
+/* 按钮（正文中） */
+.cta {
+  margin: 16px 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn:hover {
+  filter: brightness(0.97);
+}
+
+/* 卡片 */
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+/* 浅灰区（Abstract、Impact） */
+.section.gray {
+  background: #f3f4f6;
+}
+
+.lead {
+  width: min(900px, 92%);
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.h2-center {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.section.tight {
+  padding-top: 44px;
+  padding-bottom: 44px;
+}
+
+/* 图墙（Results） */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.gallery .card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 代码块（用于 BibTeX 等） */
+pre.code {
+  background: #0b1020;
+  color: #e6edf3;
+  padding: 16px;
+  border-radius: var(--radius);
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* 页脚 */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 64px;
+  color: var(--muted);
+}
+
+.sep {
+  opacity: 0.6;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.lightbox img {
+  max-width: min(1000px, 94vw);
+  max-height: 90vh;
+  border-radius: 8px;
+}
+
+.lightbox.show {
+  display: flex;
+}
+
+/* ===== Hero 轮播样式（修复 .hero-slider 断行） ===== */
+.hero-slider {
+  position: relative;
+  background: #fff;
+}
+
+.hero-slider .slides {
+  position: relative;
+  aspect-ratio: 21/9; /* 需要可改成 16 / 9 */
+  overflow: hidden;
+}
+
+.hero-slider .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.hero-slider .slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hero-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background-color: #fff;
+}
+
+/* 左右切换按钮 */
+.hero-slider .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+.hero-slider .nav:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-slider .nav.prev {
+  left: 10px;
+}
+
+.hero-slider .nav.next {
+  right: 10px;
+}
+
+/* 圆点 */
+.hero-slider .dots {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.hero-slider .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #999;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hero-slider .dot.is-active {
+  background: #000;
+}
+
+@media (max-width: 640px) {
+  .hero-slider .slides {
+    aspect-ratio: 16/9;
+  }
+  .hero-slider .nav {
+    width: 34px;
+    height: 34px;
+  }
+}
+/* 移动端：PDF 预览比例 */
+@media (max-width: 480px) {
+  .pdf-frame {
+    aspect-ratio: 3/4;
+  }
+}
+/* ===== 通用图集网格（含标题） ===== */
+.fig-grid {
+  --min: 260px; /* 每列最小宽度，按需要调 */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--min), 1fr));
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.fig-grid.cols-2 {
+  --min: 380px;
+}
+
+.fig-grid.cols-3 {
+  --min: 260px;
+} /* 默认 */
+.fig-grid.cols-4 {
+  --min: 200px;
+}
+
+.fig {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.fig img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fig figcaption {
+  padding: 8px 10px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* 可选：给“输入图”加高亮边框，类似绿色描边 */
+.fig--input {
+  outline: 3px solid #22c55e;
+  outline-offset: -3px;
+}
+
+/* 如果想让整个区块像一张卡片有内边距 */
+.card.pad {
+  padding: 16px;
+}
+
+/* ===== 图片分割线（与内容等宽） ===== */
+/* 可调参数 */
+:root {
+  --divider-height: 18px; /* 分割线高度 = 图片显示高度 */
+  --divider-opacity: .85; /* 透明度，想更淡就调小，比如 .55 */
+}
+
+.section + .section {
+  position: relative;
+}
+
+/* 用你的 PNG 横向平铺做分割线 */
+.section + .section:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0; /* ✅ 从最左边开始 */
+  width: 100vw; /* ✅ 铺满整个视口宽度 */
+  height: var(--divider-height);
+  background-image: url("/gemholm/assets/images/divider/stars.png");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 100%;
+  opacity: var(--divider-opacity);
+  /* —— 关键：背景图片 + 横向 repeat —— */
+  background-image: url("/gemholm/assets/images/divider/stars.png");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 100%; /* 高度铺满，宽度按比例平铺 */
+  /* 如果页面背景很浅、想更柔和，可加滤镜：
+  filter: saturate(.9) brightness(.97);
+  */
+}
+
+/* 不想要某一条分割线：给该 section 加 .no-divider */
+.section.no-divider::before {
+  content: none;
+}
+
+/* 小屏略微减小高度 */
+@media (max-width: 640px) {
+  :root {
+    --divider-height: 14px;
+  }
+}
+/* ==== Approach grid: force edge-to-edge, no empty tracks ==== */
+/* 容器一定要占满 */
+.card.edge {
+  padding: 0;
+}
+
+.fig-grid {
+  width: 100%;
+}
+
+/* 强制覆盖任何默认的列定义：用 auto-fit + minmax 收掉空列，铺满整行 */
+.fig-grid.full {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min, 160px), 1fr)) !important;
+  justify-content: stretch; /* 不要留下右侧空带 */
+  align-items: stretch;
+  gap: 4px; /* 比原来更紧一点；想更贴就改 2px */
+}
+
+/* 正方形裁切（如果你前面已有同名规则，可以忽略这段或保留） */
+.fig-grid.square .fig img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
+
+/* 说明文字固定在下方 */
+.fig-grid.belowcap .fig {
+  margin: 0;
+}
+
+.fig-grid.belowcap .fig figcaption {
+  position: static;
+  padding: 6px 2px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* 预设最小列宽（越小越多列、越紧凑） */
+.fig-grid.s-160 {
+  --min: 160px;
+}
+
+.fig-grid.s-180 {
+  --min: 180px;
+}
+
+.fig-grid.s-200 {
+  --min: 200px;
+}
+
+/* ========== PDF viewer ========== */
+.pdf-wrap {
+  width: 100%;
+  max-width: 1200px; /* 和页面内容宽度保持一致 */
+  margin: 2rem auto;
+  height: min(90vh, 1000px); /* 高度自适应，最多 1000px */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+.pdf-wrap .pdf-object,
+.pdf-wrap embed,
+.pdf-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* PDF 预览 iframe 的基础样式 */
+.pdf-embed {
+  width: 100%;
+  height: min(80vh, 950px); /* 桌面端较高，移动端自动压缩 */
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* 移动端再矮一点 */
+@media (max-width: 768px) {
+  .pdf-embed {
+    height: 70vh;
+  }
+}
+/* 载入两款常用“手写风”中文/英文字体（有回退方案） */
+/* 只加载 Patrick Hand + 中文兜底 */
+:root {
+  /* 让 --hand-font 以 Patrick Hand 为主，中文兜底用 Ma Shan Zheng */
+  --hand-font: "Patrick Hand", "Ma Shan Zheng",
+               ui-sans-serif, -apple-system, system-ui, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+               sans-serif;
+}
+
+/* 用在 5 个 section 标题上的公共类 */
+/* 手写标题：更大、更黑、带阴影+细描边 */
+/* 手写标题：更大 + 大屏分段再放大 */
+.section h2.hand-title {
+  font-family: var(--hand-font);
+  font-weight: 900;
+  color: #0d0d0d;
+  line-height: 1.05;
+  letter-spacing: 0.4px;
+  margin: 30px 0 10px;
+  /* 更强可读性：细描边 + 柔和阴影 */
+  -webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.18);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.06), 0 8px 22px rgba(0, 0, 0, 0.12);
+  /* 移动端～中等屏幕：已经比之前大很多 */
+  font-size: clamp(28px, 4.6vw, 56px);
+}
+
+/* 大屏逐级再放大 */
+@media (min-width: 1200px) {
+  .hand-title {
+    font-size: 64px;
+  }
+}
+@media (min-width: 1536px) {
+  .hand-title {
+    font-size: 72px;
+  }
+}
+@media (min-width: 1920px) {
+  .hand-title {
+    font-size: 84px;
+  }
+}
+/* 你已有的居中类 h2-center 继续控制对齐；其余标题仍按容器对齐 */
+/* 右上角导航按钮用 Patrick Hand */
+.nav.actions a.pill {
+  font-family: "Patrick Hand", cursive;
+  font-size: 1.2rem;
+}
+
+/* 左上角标题使用 Patrick Hand 字体 */
+.brand {
+  font-family: "Patrick Hand", cursive;
+  font-size: 1.6rem; /* 可按需要调大调小 */
+  font-weight: normal; /* Patrick Hand 不需要粗体 */
+}
+
+/* 01 */ /* 让 section 中的二级标题(带 hand-title)更小；只新增，不改原规则 */
+.section h2.hand-title {
+  font-size: clamp(22px, 3.2vw, 36px); /* ✅ 明显更小；覆盖 .section h2 的字号 */
+  line-height: 1.12;
+}
+
+/* 如需“更小一丢丢”的个别标题，在 markdown 里加 .hand-title--sm 即可 */
+.section h2.hand-title.hand-title--sm {
+  font-size: clamp(20px, 2.9vw, 32px); /* ✅ 可选更小档 */
+}
+
+.hero img,
+.swiper img,
+.carousel img {
+  display: block;
+  margin: 0 auto;
+  width: 100%; /* 宽度占满容器 */
+  height: auto; /* 高度自动，避免被拉伸 */
+  max-height: 440px; /* ✅ 调整为稍高一点，完整显示图片 */
+  object-fit: contain; /* ✅ 改回 contain，完整显示图片 */
+  background-color: #fff; /* ✅ 背景设为白色，不出现黑边 */
+  border-radius: 12px; /* 可选，美观 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 可选，柔和阴影 */
+  padding: 8px 0; /* ✅ 给上下留一点间距，防止贴边被截 */
+}
+
+/* 单图样式：让原来的三列布局变成一列全宽显示 */
+.fig-grid.single {
+  display: grid;
+  grid-template-columns: 1fr; /* ✅ 改成单列 */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.fig-grid.single img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* ===== 调整 Experimental Details 图片宽度 ===== */
+.hero-slider.experiment {
+  max-width: 1200px; /* ✅ 与主页对齐，可根据实际调节 */
+  margin: 0 auto; /* ✅ 居中 */
+  aspect-ratio: 21/9; /* ✅ 保持合理比例 */
+}
+
+.hero-slider.experiment img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background-color: #fff;
+}
+
+/* ===== 只针对 impact 的两个轮播，显示整图并把箭头移到外面 ===== */
+/* 1) 容器不要固定 21:9，按图片原比例自适应 */
+.hero-slider.experiment .slides {
+  aspect-ratio: auto !important;
+  overflow: visible; /* 允许箭头超出 */
+}
+
+/* 2) 图片按原比例完整显示，不裁切、不拉伸 */
+.hero-slider.experiment img {
+  width: 100%;
+  height: auto !important;
+  object-fit: contain !important; /* 保证整张图都可见 */
+  display: block;
+  background-color: #fff;
+}
+
+/* ---- 固定轮播区域高度为 600px，并让图片居中显示 ---- */
+.hero-slider.experiment .slides {
+  height: 600px; /* 固定高度：不再抖 */
+  display: flex;
+  align-items: center; /* 图片垂直居中 */
+  justify-content: center; /* 图片水平居中 */
+  overflow: hidden;
+}
+
+.hero-slider.experiment img {
+  max-height: 100%; /* 高度不超过轮播区 */
+  max-width: 100%; /* 宽度不挤出左右 */
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+/* 3) 箭头移到容器外侧，避免遮住图；并稍微小一点、透明一点 */
+.hero-slider.experiment .nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.hero-slider.experiment .nav.prev {
+  left: -28px;
+} /* 往外挪 */
+.hero-slider.experiment .nav.next {
+  right: -28px;
+} /* 往外挪 */
+@media (max-width: 640px) {
+  .hero-slider.experiment .nav.prev {
+    left: -18px;
+  }
+  .hero-slider.experiment .nav.next {
+    right: -18px;
+  }
+}
+/* ==== Experimental Details 两个轮播：修复高度塌陷 + 不裁边 ==== */
+/* 父容器由“正在显示的那张图”来决定高度，不强制比例 */
+.hero-slider.experiment .slides {
+  position: relative;
+  aspect-ratio: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* 关键：非激活页保持 absolute，不占高度；激活页改 relative 来撑开父容器 */
+.hero-slider.experiment .slide {
+  position: absolute !important; /* 不占据文档流，不撑高父容器 */
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.hero-slider.experiment .slide.is-active {
+  position: relative !important; /* ✅ 只有激活页参与高度计算 */
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 图片按原比例完整显示，不裁切 */
+.hero-slider.experiment .slide img,
+.hero-slider.experiment img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block;
+  background: #fff;
+}
+
+/* 指示点与左右箭头（可保留你之前的设置） */
+.hero-slider.experiment {
+  position: relative;
+  padding: 0 44px; /* 两侧护栏，避免箭头压住图片；可调 */
+}
+
+.hero-slider.experiment .nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.hero-slider.experiment .nav.prev {
+  left: 8px;
+}
+
+.hero-slider.experiment .nav.next {
+  right: 8px;
+}
+
+/* 让 Experimental Details 的指示点位于轮播框底部正中 */
+.hero-slider.experiment {
+  padding: 0 44px 32px; /* 左右护栏 + 底部给点点留空间 */
+  position: relative;
+}
+
+.hero-slider.experiment .dots {
+  position: absolute; /* 底部正中 */
+  left: 50%;
+  bottom: 10px; /* 距底部 10px，可按需调 */
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+/* 点点本身保持你之前的颜色规则即可：未选中灰，选中黑/白 */
+@media (max-width: 640px) {
+  .hero-slider.experiment {
+    padding: 0 32px;
+  }
+  .hero-slider.experiment .nav.prev {
+    left: 6px;
+  }
+  .hero-slider.experiment .nav.next {
+    right: 6px;
+  }
+}
+/* 新的扁平 hero，替代原来 section.hero 的卡片感 */
+.hero.hero--flat {
+  background: #fff;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 3.5rem 1.5rem 2.5rem;
+}
+
+.hero__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 渐变标题 */
+.gradient-title {
+  font-size: clamp(2.5rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  background: linear-gradient(90deg, #2f63ff 0%, #9d4edd 50%, #ff7b72 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+/* 作者区 */
+.hero__authors {
+  margin-bottom: 1.5rem;
+  color: #4a4a4a;
+  font-size: 0.92rem;
+}
+
+.hero__authors-line {
+  margin-bottom: 0.25rem;
+}
+
+.hero__affiliations {
+  margin-bottom: 0.25rem;
+  font-size: 0.86rem;
+  color: #6b7280;
+}
+
+.hero__notes {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+/* 顶部按钮一排 */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+/* 通用按钮外观：pill */
+.top-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.3rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  gap: 0.35rem;
+}
+
+.top-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* 按 key 上色（你 _config.yml 里已经有 key 了） */
+.top-btn--paper {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+}
+
+.top-btn--code {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+}
+
+.top-btn--dataset {
+  background: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+}
+
+.top-btn--demo {
+  background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+}
+
+/* 小屏适配 */
+@media (max-width: 640px) {
+  .hero.hero--flat {
+    padding: 2.5rem 1rem 2rem;
+  }
+  .gradient-title {
+    font-size: 2.25rem;
+  }
+  .hero__actions {
+    gap: 0.5rem;
+  }
+}
+/* 覆盖 hero 标题的样式，防止继承手写体和 text-shadow */
+.hero .gradient-title,
+.hero.hero--flat .gradient-title {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 700;
+  text-shadow: none !important; /* 去掉你看到的那圈白/蓝边 */
+  letter-spacing: -0.01em;
+}
+
+/* 如果你的全局 h1 本身有 margin-top 很大，可以顺便收一收 */
+.hero.hero--flat {
+  padding-top: 3rem;
+}
+
+/* 渐变标题 */
+.hero-title-gradient {
+  font-size: clamp(2.6rem, 5vw, 3.2rem);
+  text-align: center;
+  font-weight: 700;
+  background: linear-gradient(90deg, #5b6cff 0%, #d94bbb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.hero__inner--center {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto 2.5rem;
+}
+
+.hero__authors--centered p {
+  margin: 0.25rem 0;
+}
+
+/* 按钮样式 */
+.hero__actions--centered {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+}
+
+.paper-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  background: #0a74d0;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(10, 116, 208, 0.25);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.paper-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(10, 116, 208, 0.25);
+}
+
+/* 按钮颜色按类型区分 */
+.paper-pill--demo {
+  background: #0a74d0;
+}
+
+.paper-pill--pdf {
+  background: #7d4acb;
+}
+
+.paper-pill--code {
+  background: #f97316;
+}
+
+.paper-pill--arxiv {
+  background: #10b981;
+}
+
+.paper-intro--center {
+  text-align: center;
+  margin-top: 1.4rem;
+  margin-bottom: 2.2rem;
+  color: #4b5563;
+}
+
+/* 轮播整体与标题之间的留白 */
+.hero-slider.card {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  border-radius: 20px;
+}
+
+/* 专门给首页这个新 hero 用的标题样式，覆盖掉旧的发光效果 */
+.hero.hero--paper .hero-title-gradient {
+  /* 字体家族：换成更像 Nano3D 的干净字体 */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  /* 尺寸 */
+  font-size: clamp(2.6rem, 5vw, 3.2rem);
+  font-weight: 700;
+  text-align: center;
+  /* 渐变本体 */
+  background: linear-gradient(90deg, #5b6cff 0%, #d94bbb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* 关键：把主题里加的阴影、滤镜、描边通通关掉 */
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-text-stroke: 0 !important;
+  /* 间距 */
+  margin-bottom: 1.5rem;
+  line-height: 1.05;
+}
+
+/* 1) 引一个正常的无衬线字体，跟 Nano3D 风格接近 */
+/* 2) 专门针对你首页这个 hero 标题，强行换掉手写体 */
+.hero.hero--paper .hero-title-gradient {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  text-align: center;
+  /* Nano3D 那种蓝紫到橘的渐变，你可以改颜色 */
+  background: linear-gradient(90deg, #2f62d6 0%, #d46a7a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* 把原主题的发光/描边都关掉 */
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+}
+
+/* 基础形状和字体 */
+.paper-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  padding: 0.55rem 1.45rem;
+  border-radius: 999px;
+  font-family: "Poppins", "Inter", sans-serif;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  /* 这一层让按钮像贴在白纸上，有点奶 */
+  box-shadow: 0 8px 20px rgba(74, 58, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  /* 不要太艳 */
+  filter: saturate(0.95) brightness(1.02);
+}
+
+/* hover 稍微提一下 */
+.paper-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(46, 45, 89, 0.15);
+}
+
+/* Paper：偏蓝紫，柔一点 */
+.paper-pill--paper {
+  background: linear-gradient(120deg, #4555c7 0%, #6a7fe0 100%);
+}
+
+/* Code：稍微偏紫、而不是纯蓝 */
+.paper-pill--code {
+  background: linear-gradient(120deg, #5a4fc6 0%, #8e7bdd 100%);
+}
+
+/* Dataset：紫里带玫一点 */
+.paper-pill--dataset {
+  background: linear-gradient(120deg, #8a5bdd 0%, #c46ad4 100%);
+}
+
+/* Demo：粉紫+一点点玫红 */
+.paper-pill--demo {
+  background: linear-gradient(120deg, #b35aa5 0%, #c76abf 100%);
+}
+
+/* 顶部导航整体统一成非手写体 */
+.site-header,
+.site-header *,
+.navbar,
+.navbar * {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* 左上角标题（根据常见 class 都列上了） */
+.site-title,
+.navbar-brand,
+.header__title,
+.logo-text {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+/* 右上角几个链接 */
+.site-header a,
+.navbar a,
+.top-nav a,
+.header__nav a {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 500;
+}
+
+/* ===== 最终覆盖 header 左上角标题 ===== */
+.site-header .brand {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 1.3rem !important;
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* ===== 覆盖章节标题为渐变居中版 ===== */
+.section h2.hand-title,
+.section h1.hand-title {
+  /* 换成首页的无衬线 */
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+  /* 居中+占整行 */
+  text-align: center;
+  width: 100%;
+  display: block;
+  /* 渐变色，和主页一致 */
+  background: linear-gradient(90deg, #2f67d8 0%, #de7686 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  /* 去掉你之前手写体那套的描边和阴影 */
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  /* 大小你可以调，这里给个中号 */
+  font-size: clamp(1.9rem, 4vw, 2.3rem);
+  line-height: 1.05;
+  margin: 2.5rem 0 1.2rem;
+}
+
+/* ===== 交替灰白背景样式 ===== */
+.section:nth-of-type(even) {
+  background-color: #f6f7f9; /* 浅灰色背景 */
+}
+
+.section:nth-of-type(odd) {
+  background-color: #ffffff; /* 白色背景 */
+}
+
+/* 让每个 section 的内容有点留白，不至于贴边 */
+.section {
+  padding: 4rem 0; /* 上下留白 */
+  border-radius: 8px;
+}
+
+.hero-slider img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 300px; /* 防止没加载完高度为0 */
+  object-fit: contain;
+}
+
+/*# sourceMappingURL=styles.css.map */

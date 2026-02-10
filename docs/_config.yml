@@ -1,0 +1,32 @@
+title: "Consistent Text-to-Image Generation via Scene De-contextualization"
+description: "Single-page project display"
+url: "https://tntek.github.io"
+baseurl: "/SDeC"
+permalink: pretty
+markdown: kramdown
+theme: null
+plugins: []
+
+
+links:
+  # demo: "https://your-demo.example.com"
+  # pdf: "/assets/papers/paper.pdf"
+  # code: "https://github.com/ddmeer/gemholm"
+  # arxiv: "https://arxiv.org/abs/xxxx.xxxxx"
+
+
+
+  - name: Paper
+    url: /assets/papers/paper.pdf
+    key: paper
+  - name: Code
+    url: https://github.com/...
+    key: code
+  - name: Dataset
+    url: https://example.com/dataset
+    key: dataset
+  - name: Demo
+    url: /demo
+    key: demo
+
+

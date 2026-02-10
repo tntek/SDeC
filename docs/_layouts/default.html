@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+
+
+  <!-- ✅ 自定义 favicon：SVG 为首选，带 PNG 与苹果、Safari 兼容 -->
+<link rel="icon" href="{{ '/assets/icons/favicon-32x32.png' | relative_url }}" type="image/png">
+
+
+
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+  <!-- ✅ 新增：引入 _includes/head.html -->
+  {% include head.html %}
+
+</head>
+<body>
+
+  {% unless page.hide_header %}
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">{{ site.title }}</div>
+
+
+
+
+{% assign _pdf = site.links.pdf | default: '/assets/papers/paper.pdf' %}
+
+<nav class="nav actions">
+  <a class="pill demo" href="{{ site.links.demo | default: '#' }}" target="_blank" rel="noopener">Demo</a>
+  <a class="pill"
+     href="{% if _pdf contains '://' %}{{ _pdf }}{% else %}{{ _pdf | relative_url }}{% endif %}"
+     target="_blank" rel="noopener">PDF</a>
+  <a class="pill"      href="{{ site.links.code  | default: '#' }}" target="_blank" rel="noopener">Code</a>
+  <a class="pill"      href="{{ site.links.arxiv | default: '#' }}" target="_blank" rel="noopener">arXiv</a>
+</nav>
+
+
+
+    </div>
+  </header>
+  {% endunless %}
+
+  <main class="site-main">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© {{ "now" | date: "%Y" }} DDM</span>
+      <span class="sep">•</span>
+      <a href="https://github.com/ddmeer/gemholm" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <!-- 轻量 Lightbox（保留，便于后续结果图放大） -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <img alt="预览大图">
+  </div>
+  <script>
+  (function () {
+    const overlay = document.getElementById('lightbox');
+    const overlayImg = overlay.querySelector('img');
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-lightbox]');
+      if (a) {
+        e.preventDefault();
+        overlayImg.src = a.getAttribute('href');
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+      }
+      if (e.target === overlay) {
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden', 'true');
+        overlayImg.src = '';
+      }
+    });
+  })();
+  </script>
+
+  <!-- Hero 轮播脚本（零依赖） -->
+  <script>
+  (function () {
+    document.querySelectorAll('.hero-slider').forEach(function (root) {
+      var slides = Array.from(root.querySelectorAll('.slide'));
+      if (slides.length <= 1) return;
+
+      // 生成圆点
+      var dotsWrap = root.querySelector('.dots') || document.createElement('div');
+      dotsWrap.classList.add('dots'); dotsWrap.innerHTML = '';
+      slides.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.className = 'dot' + (i === 0 ? ' is-active' : '');
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        b.addEventListener('click', function () { go(i); });
+        dotsWrap.appendChild(b);
+      });
+      if (!root.querySelector('.dots')) root.appendChild(dotsWrap);
+      var dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+
+      var prevBtn = root.querySelector('.prev');
+      var nextBtn = root.querySelector('.next');
+      var idx = 0;
+      var autoplay = root.dataset.autoplay === 'true';
+      var interval = parseInt(root.dataset.interval || '3500', 10);
+      var timer = null;
+
+      function setActive(i) {
+        slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+        dots.forEach(function (d, k) { d.classList.toggle('is-active', k === i); });
+      }
+      function go(i) { idx = (i + slides.length) % slides.length; setActive(idx); restart(); }
+      function next() { go(idx + 1); }
+      function prev() { go(idx - 1); }
+
+      prevBtn && prevBtn.addEventListener('click', prev);
+      nextBtn && nextBtn.addEventListener('click', next);
+
+      function start() { if (!autoplay) return; stop(); timer = setInterval(next, interval); }
+      function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+      function restart(){ if (autoplay) { stop(); start(); } }
+
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+      // 触摸滑动
+      var startX = null;
+      root.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, {passive:true});
+      root.addEventListener('touchend', function (e) {
+        if (startX == null) return;
+        var dx = e.changedTouches[0].clientX - startX; startX = null;
+        var threshold = 35;
+        if (dx > threshold) prev(); else if (dx < -threshold) next();
+      });
+
+      // 键盘左右键
+      root.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+      root.setAttribute('tabindex', '0');
+
+      start();
+    });
+  })();
+
+
+
+
+
+function initHeroSlider(root){
+  const slides = Array.from(root.querySelectorAll('.slide'));
+  const dots   = Array.from(root.querySelectorAll('.dot'));
+  const prevBtn = root.querySelector('.nav.prev');
+  const nextBtn = root.querySelector('.nav.next');
+
+  let idx = Math.max(0, slides.findIndex(s => s.classList.contains('is-active')));
+  if (idx < 0) idx = 0;
+
+  function show(i){
+    idx = (i + slides.length) % slides.length;
+    slides.forEach((s, k) => s.classList.toggle('is-active', k === idx));
+    dots.forEach((d, k) => d.classList.toggle('is-active', k === idx));
+  }
+
+  prevBtn && prevBtn.addEventListener('click', () => show(idx - 1));
+  nextBtn && nextBtn.addEventListener('click', () => show(idx + 1));
+  dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+
+  /* ==== ✅ 自动轮播（可选） ==== 
+     在 HTML 上写 data-autoplay="5000" 就会每 5s 自动播放 */
+  const interval = Number(root.dataset.autoplay || 0);
+  let timer = null;
+
+  const start = () => {
+    if (interval > 0 && !timer) timer = setInterval(() => show(idx + 1), interval);
+  };
+  const stop = () => {
+    if (timer) { clearInterval(timer); timer = null; }
+  };
+
+  // 悬停暂停，离开继续；切换标签页时暂停
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stop() : start();
+  });
+
+  start();  // 如果设置了 data-autoplay，就开始自动轮播
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hero-slider').forEach(initHeroSlider);
+});
+</script>
+
+</body>
+</html>
