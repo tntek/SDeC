@@ -15,7 +15,7 @@ Official codebase for the ICLR 2026 paper “Consistent Text-to-Image Generation
 - **Title**: CONSISTENT TEXT-TO-IMAGE GENERATION VIA SCENE DE-CONTEXTUALIZATION
 - **Venue**: ICLR 2026
 - **Authors**: Song Tang, Peihao Gong, Kunyu Li, Kai Guo, Boyu Wang, Mao Ye, Jianwei Zhang, Xiatian Zhu
-- **Project Page**: [*SDeC*](https://ddmeer.github.io/gemholm/)
+- **Project Page**: [*SDeC*](http://www.taulab.cc/SDeC-project/)
 - **OpenReview**: https://openreview.net/forum?id=rRp8yYKRGj
 - **PDF**: [*PDF*](https://openreview.net/pdf?id=rRp8yYKRGj)
 
@@ -68,4 +68,5 @@ Built upon:
 
 
 ---
+
 
