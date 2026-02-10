@@ -17,7 +17,7 @@ Official codebase for the ICLR 2026 paper “Consistent Text-to-Image Generation
 - **Authors**: Song Tang, Peihao Gong, Kunyu Li, Kai Guo, Boyu Wang, Mao Ye, Jianwei Zhang, Xiatian Zhu
 - **Project Page**: [*SDeC*](https://ddmeer.github.io/gemholm/)
 - **OpenReview**: https://openreview.net/forum?id=rRp8yYKRGj
-- **PDF**: *TBD*
+- **PDF**: [*PDF*](https://openreview.net/pdf?id=rRp8yYKRGj)
 
 **Abstract**
 > Consistent text-to-image (T2I) generation seeks to produce identity-preserving images of the same subject across diverse scenes, yet it often fails due to a phenomenon called identity (ID) shift. Previous methods have tackled this issue, but typically rely on the unrealistic assumption of knowing all target scenes in advance. This paper reveals that a key source of ID shift is the native correlation between subject and scene context, called scene contextualization, which arises naturally as T2I models fit the training distribution of vast natural images. We formally prove the near-universality of this scene-subject correlation and derive theoretical bounds on its strength. On this basis, we propose a novel, efficient, training-free prompt embedding editing approach, called Scene De-Contextualization (SDeC), that imposes an inversion process of T2I’s built-in scene contextualization. Specifically, it identifies and suppresses the latent scene-subject correlation within the ID prompt’s embedding by quantifying SVD directional stability to re-weight the corresponding eigenvalues adaptively. Critically, SDeC allows for per-scene use (one prompt per scene) without requiring prior access to all target scenes. This makes it a highly flexible and general solution well-suited to real-world applications where such prior knowledge is often unavailable or varies over time. Experiments demonstrate that SDeC significantly enhances identity preservation while maintaining scene diversity.
@@ -68,3 +68,4 @@ Built upon:
 
 
 ---
+
