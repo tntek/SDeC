@@ -483,13 +483,13 @@ pre.code {
   left: 0; /* ✅ 从最左边开始 */
   width: 100vw; /* ✅ 铺满整个视口宽度 */
   height: var(--divider-height);
-  background-image: url("/gemholm/assets/images/divider/stars.png");
+  background-image: url("/SDeC/assets/images/divider/stars.png");
   background-repeat: repeat-x;
   background-position: center;
   background-size: auto 100%;
   opacity: var(--divider-opacity);
   /* —— 关键：背景图片 + 横向 repeat —— */
-  background-image: url("/gemholm/assets/images/divider/stars.png");
+  background-image: url("/SDeC/assets/images/divider/stars.png");
   background-repeat: repeat-x;
   background-position: center;
   background-size: auto 100%; /* 高度铺满，宽度按比例平铺 */
