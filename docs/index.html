@@ -15,13 +15,13 @@ title: Consistent Text-to-Image Generation via Scene De-contextualization
     <!-- 作者与单位 -->
     <div class="hero__authors hero__authors--centered">
       <p class="hero__authors-line">
-        ✉ Song Tang<sup>1,2,3</sup>,&nbsp; Peihao Gong<sup>1</sup>,&nbsp; Kunyu Li<sup>4</sup>;Kai Guo<sup>1</sup>,&nbsp; Boyu Wang<sup>5,6</sup>,&nbsp; Mao Ye<sup>7</sup>,&nbsp; Jianwei Zhang<sup>2</sup>,&nbsp; Xiatian Zhu<sup>8</sup>
+        Song Tang<sup>1,2,3</sup>,&nbsp; Peihao Gong<sup>1</sup>,&nbsp; Kunyu Li<sup>4</sup>,&nbsp; Kai Guo<sup>1</sup>,&nbsp; Boyu Wang<sup>5,6</sup>,&nbsp; ✉ Mao Ye<sup>7</sup>,&nbsp; Jianwei Zhang<sup>2</sup>,&nbsp; ✉ Xiatian Zhu<sup>8</sup>
       </p>
       <p class="hero__affiliations">
         <sup>1</sup>University of Shanghai for Science and Technology &nbsp; <sup>2</sup>Universität Hamburg &nbsp; <sup>3</sup>ComOriginMat Inc &nbsp; <sup>4</sup>Fudan University &nbsp; <sup>5</sup>Western University &nbsp; <sup>6</sup>Vector Institute &nbsp; <sup>7</sup>University of Electronic Science and Technology of China &nbsp; <sup>8</sup>University of Surrey &nbsp;
       </p>
       <p class="hero__notes">
-        * Equal contribution &nbsp; ✉ Corresponding author
+       ✉ Corresponding author
       </p>
     </div>
 
@@ -29,9 +29,10 @@ title: Consistent Text-to-Image Generation via Scene De-contextualization
     <!-- testtest -->
     <div class="hero__actions hero__actions--centered">
       {% for link in site.links %}
+      {% assign href = link.url %}
         <a
           class="paper-pill paper-pill--{{ link.key | downcase }}"
-          href="{{ link.url }}"
+          href="{% if href contains '://' %}{{ href }}{% else %}{{ href | relative_url }}{% endif %}"
           target="_blank" rel="noopener"
         >
           {{ link.name }}

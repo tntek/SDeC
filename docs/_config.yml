@@ -17,7 +17,7 @@ links:
 
 
   - name: Paper
-    url: https://raw.githubusercontent.com/tntek/SDeC/main/docs/assets/papers/paper.pdf
+    url: /assets/papers/paper.pdf
     key: paper
   - name: Code
     url: https://github.com/tntek/SDeC
