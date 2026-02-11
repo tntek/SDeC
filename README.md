@@ -5,9 +5,9 @@ Official codebase for the ICLR 2026 paper “Consistent Text-to-Image Generation
 ---
 
 ## ✨ Highlights
-- Consistent multi-frame generation with identity prompts and frame prompt sequences.
-- Scene de-contextualization via a trainable SVD amplifier that decouples ID from scene context.
-- SDXL-compatible pipeline built on Stable Diffusion XL and `diffusers`.
+- We propose a scene contextualization perspective for ID shift with T2I models.
+- We theoretically characterize and quantify this contextualization, leading to a novel SDeC approach for mitigating ID shift per scene without the need for complete target scenes in advance.
+- Extensive experiments show that SDeC can enhance identity preservation, maintain scene diversity, and offer plug-and-play flexibility at per-scene level and across diverse tasks.
 
 ---
 
@@ -63,11 +63,11 @@ MIT/Apache-2.0
 ## 🙏 Acknowledgements
 Built upon:
 - Hugging Face `diffusers`
-- `compel`
 - Stable Diffusion XL
-
+- Stable Diffusion 3
 
 ---
+
 
 
 
