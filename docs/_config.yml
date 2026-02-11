@@ -20,11 +20,11 @@ links:
     url: /assets/papers/paper.pdf
     key: paper
   - name: Code
-    url: https://github.com/...
+    url: https://github.com/tntek/SDeC
     key: code
-  - name: Dataset
-    url: https://example.com/dataset
-    key: dataset
+  # - name: Dataset
+  #   url: https://example.com/dataset
+  #   key: dataset
   - name: Demo
     url: /demo
     key: demo
