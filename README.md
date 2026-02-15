@@ -1,4 +1,4 @@
-# CONSISTENT TEXT-TO-IMAGE GENERATION VIA SCENE DE-CONTEXTUALIZATION (SDeC)
+# Consistent Text-to-Image Generation via Scene De-Contextualization (SDeC)
 
 Official codebase for the ICLR 2026 paper “Consistent Text-to-Image Generation via Scene De-Contextualization” (OpenReview: https://openreview.net/forum?id=rRp8yYKRGj).
 
@@ -12,7 +12,7 @@ Official codebase for the ICLR 2026 paper “Consistent Text-to-Image Generation
 ---
 
 ## 📌 Paper
-- **Title**: CONSISTENT TEXT-TO-IMAGE GENERATION VIA SCENE DE-CONTEXTUALIZATION
+- **Title**: Consistent Text-to-Image Generation via Scene De-Contextualization
 - **Venue**: ICLR 2026
 - **Authors**: Song Tang, Peihao Gong, Kunyu Li, Kai Guo, Boyu Wang, Mao Ye, Jianwei Zhang, Xiatian Zhu
 - **Project Page**: http://www.taulab.cc/SDeC/
@@ -49,7 +49,7 @@ MIT/Apache-2.0
 ## 📎 Citation
 
 ```bibtex
-@inproceedings{Tang2026SDeC,
+@inproceedings{tang2026SDeC,
   title     = {Consistent Text-to-Image Generation via Scene De-Contextualization},
   author    = {Tang, Song and Gong, Peihao and Li, Kunyu and Guo, Kai and Wang, Boyu and Ye, Mao and Zhang, Jianwei and Zhu, Xiatian},
   booktitle = {International Conference on Learning Representations (ICLR)},
@@ -67,6 +67,7 @@ Built upon:
 - Stable Diffusion 3
 
 ---
+
 
 
 
